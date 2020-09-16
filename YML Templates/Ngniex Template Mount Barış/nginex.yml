@@ -68,7 +68,7 @@ Resources:
   KenNginexCFInstance:
     Type: AWS::EC2::Instance
     Properties:
-      KeyName: baris
+      KeyName: bu_bizim_yeni
       SecurityGroupIds:
         - !Ref WebServerSecurityGroup
       Tags:
