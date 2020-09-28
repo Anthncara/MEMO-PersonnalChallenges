@@ -1,0 +1,73 @@
+SG & ELB with Cloud Formation using YAML
+
+    Write Security Group
+    Write Target Group
+    Write Listener
+    Write Application Load Balancer
+    Write Auto Scaling Policy
+    Write Launch Configuration
+    Write Mappings (generic usage)
+    Write Auto Scaling Group
+    Write Parameters (generic usage)
+    Write Outputs
+
+
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+
+Mapping Template:
+
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/mappings-section-structure.html
+
+EC2 genel:
+
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html
+
+REsources :
+
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+
+SECURİTY GROUP LAR STATEFUL DUR
+
+CLOUDFORMATION:
+- Create Security Group
+- Create Target Group
+- Create Application Load Balancer
+- Create Launch Template
+- Create Auto Scaling Group
+- Create Auto Scaling Policy (Cloudwatch alarm)
+
+
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: |
+  
+Parameters: 
+	User In put alıyormuş. 
+  
+Metadata:
+  
+Mappings:
+	
+  
+Conditions:
+  
+Resources: 
+
+LoadBAlancer !GetAtt 
+
+Listeners:
+
+targetgroup:
+
+https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_TargetGroup.html
+
+	Önemli...TEk zorunlu olan kısım. 
+
+	SecurityGroup: SSH ve HTTP, 
+	InGress....REquired siyahla  yazılanlar yazılabilecekler...
+IpProtocol
+
+  
+Transform:
+  
+Outputs: Çıktı veriyor.
