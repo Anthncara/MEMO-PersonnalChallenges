@@ -44,11 +44,11 @@ Resources:
             yum install python3 -y
             pip3 install flask
             cd /home/ec2-user
-            wget https://raw.githubusercontent.com/Anthncara/MEMO/master/aws/projects/001-roman-numerals-converter/appV2.py
+            https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/MEMO%20app.py
             mkdir templates
             cd templates
-            wget https://raw.githubusercontent.com/Anthncara/MEMO/master/aws/projects/001-roman-numerals-converter/templates/result.html
-            wget https://raw.githubusercontent.com/Anthncara/MEMO/master/aws/projects/001-roman-numerals-converter/templates/index.html
+            https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/templates/index.html
+            https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/templates/result.html
             cd ..
             python3 appV2.py
 
