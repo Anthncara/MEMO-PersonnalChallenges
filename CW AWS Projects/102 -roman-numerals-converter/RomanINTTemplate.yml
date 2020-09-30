@@ -40,7 +40,7 @@ Resources:
   NginexCFTemplate:
     Type: "AWS::EC2::LaunchTemplate"
     Properties:
-      LaunchTemplateName: Nginex-EC2-Template
+      LaunchTemplateName: Web_Server_of_Stackname
       LaunchTemplateData:
         ImageId: ami-0c94855ba95c71c99
         InstanceType: t2.micro

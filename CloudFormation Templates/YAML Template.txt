@@ -52,6 +52,12 @@ Mappings:
 Conditions:
   
 Resources: 
+Önemli...TEk zorunlu olan kısım. 
+	SecurityGroup: SSH ve HTTP, 
+	InGress....REquired siyahla  yazılanlar yazılabilecekler...
+IpProtocol
+
+
 
 LoadBAlancer !GetAtt 
 
@@ -61,13 +67,14 @@ targetgroup:
 
 https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_TargetGroup.html
 
-	Önemli...TEk zorunlu olan kısım. 
+	
 
-	SecurityGroup: SSH ve HTTP, 
-	InGress....REquired siyahla  yazılanlar yazılabilecekler...
-IpProtocol
+
 
   
 Transform:
   
 Outputs: Çıktı veriyor.
+
+REf
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html

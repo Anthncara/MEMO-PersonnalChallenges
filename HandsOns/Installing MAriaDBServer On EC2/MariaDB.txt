@@ -1,0 +1,41 @@
+sudo yum install mariadb-server -y
+sudo systemctl start mariadb
+sudo systemctl status mariadb
+sudo systemctl enable mariadb
+mysql -u root
+SHOW DATABASES;
+USE mysql;
+SHOW TABLES;
+SELECT * FROM user;
+SELECT Host, User, Password FROM user;
+exit bir üste
+Komutlar ; ile kullanılmalı
+ctrl +d bir üste
+ctrl+l temizleme
+
+EC2' da secure girmek için
+sudo mysql_secure_installation 
+
+Soruların hepsine YES diyoruz
+
+Secure password ile girmek için:
+mysql -u root  -p 
+ CREATE DATABASE clarusdb;
+
+CREATE USER clarususer IDENTIFIED BY 'clarus1234';
+
+GRANT ALL ON clarusdb.* TO clarususer IDENTIFIED BY 'clarus1234' WITH GRANT OPTION;
+
+ FLUSH PRIVILEGES;
+
+
+
+UBUNTU :
+
+  sudo apt update && sudo apt upgrade -y
+
+sudo apt-get install mariadb-client
+
+mysql --version
+mysql -h (host name) DNS bilgisi (ec2-..... -u clarususer -p (Kullanıcı şifre olayı)
+
