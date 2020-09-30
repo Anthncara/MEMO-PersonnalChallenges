@@ -24,9 +24,7 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0
-      Tags:
-        - Tag
-      VpcId: String
+
   WebServerHost:
     Type: "AWS::EC2::Instance"
     Properties:
@@ -44,13 +42,13 @@ Resources:
             yum install python3 -y
             pip3 install flask
             cd /home/ec2-user
-            https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/MEMO%20app.py
+            wget https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/MEMO%20app.py
             mkdir templates
             cd templates
-            https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/templates/index.html
-            https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/templates/result.html
+            wget https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/templates/index.html
+            wget https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/templates/result.html
             cd ..
-            python3 appV2.py
+            python3 app.py
 
 Outputs:
   WebsiteURL:
