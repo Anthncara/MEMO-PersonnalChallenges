@@ -48,7 +48,7 @@ Resources:
             wget https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/templates/index.html
             wget https://raw.githubusercontent.com/Anthncara/MEMO-PersonnalChallenges/master/CW%20AWS%20Projects/102%20-roman-numerals-converter/templates/result.html
             cd ..
-            python3 app.py
+            python3 MEMOapp.py
 
 Outputs:
   WebsiteURL:
