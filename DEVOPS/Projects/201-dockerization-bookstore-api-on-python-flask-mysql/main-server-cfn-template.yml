@@ -1,0 +1,109 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: >
+  This Cloudformation Template creates a Jenkins Server using JDK 11 on EC2 Instance.
+  Jenkins Server is enabled with Git, Docker and Docker Compose,
+  AWS CLI Version 2, Python 3, Ansible, and Boto3. 
+  Jenkins Server will run on Amazon Linux 2 EC2 Instance with
+  custom security group allowing HTTP(80, 8080) and SSH (22) connections from anywhere.
+
+Parameters:
+  KeyPairName:
+    Description: Enter the name of your Key Pair for SSH connections.
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: Must one of the existing EC2 KeyPair
+Resources:
+  EmpoweringRoleforPrjServer:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess
+        - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+        - arn:aws:iam::aws:policy/AdministratorAccess
+  PrjServerEC2Profile:
+    Type: "AWS::IAM::InstanceProfile"
+    Properties:
+      Roles: #required
+        - !Ref EmpoweringRoleforPrjServer
+  PrjServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH and HTTP for Prj Server
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+  PrjServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0be2609ba883822ec 
+      InstanceType: t2.micro
+      KeyName: !Ref KeyPairName
+      IamInstanceProfile: !Ref PrjServerEC2Profile
+      SecurityGroupIds:
+        - !GetAtt PrjServerSecurityGroup.GroupId
+      Tags:                
+        - Key: Name
+          Value: !Sub Prj Server of ${AWS::StackName}
+        - Key: server
+          Value: prj
+      UserData:
+        Fn::Base64: |
+          #! /bin/bash
+          # update os
+          yum update -y
+          # set server hostname as prj-server
+          hostnamectl set-hostname prj-server
+          # install git
+          yum install git -y
+          # install docker
+          amazon-linux-extras install docker -y
+          systemctl start docker
+          systemctl enable docker
+          usermod -a -G docker ec2-user
+          # install docker compose
+          curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" \
+          -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
+          # uninstall aws cli version 1
+          rm -rf /bin/aws
+          # install aws cli version 2
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          ./aws/install
+          # install python 3
+          yum install python3 -y
+          # install ansible
+          pip3 install ansible
+          # install boto3
+          pip3 install boto3
+          
+          
+Outputs:
+  PrjDNS:
+    Description: Prj Server DNS Name 
+    Value: !Sub 
+      - ${PublicAddress}
+      - PublicAddress: !GetAtt PrjServer.PublicDnsName
+  PrjURL:
+    Description: Prj Server URL
+    Value: !Sub 
+      - http://${PublicAddress}:8088
+      - PublicAddress: !GetAtt PrjServer.PublicDnsName
